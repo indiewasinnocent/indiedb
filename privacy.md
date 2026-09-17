@@ -1,6 +1,6 @@
 # IndieDB Privacy Policy
 
-**Last updated: 16 September 2026**
+**Last updated: 17 September 2026**
 
 ## 1. Introduction
 
@@ -54,9 +54,19 @@ Successful builds remove the relevant setup session. Temporary sessions are not 
 
 ## 5. Persistent Storage
 
-IndieDB does not currently use a database to store customer Discord information.
+IndieDB does not use a customer database or store message content, build history, usernames, email addresses, or other Discord profile information.
 
-Customer server configuration, setup sessions and build history are not intentionally written to persistent files by IndieDB.
+For safety, IndieDB maintains a small local ownership record named `.indiedb-ownership.json`.
+
+This record stores Discord server IDs and the IDs of channels, categories, and roles created by IndieDB. It is used to distinguish resources created by IndieDB from resources that already belong to the customer.
+
+The ownership record is necessary to help prevent IndieDB from accidentally modifying or deleting customer-created channels, categories, or roles during future builds, cleanup operations, or failed-build recovery.
+
+The ownership record does not contain Discord message content, usernames, email addresses, IP addresses, passwords, or Discord authentication credentials.
+
+If the ownership record is unavailable or lost, IndieDB does not assume that existing Discord resources belong to it. Resources that cannot be verified as IndieDB-created are treated as customer-owned and are not modified or deleted solely because their names match an IndieDB template.
+
+Local application configuration may separately contain developer credentials and authorised operator identifiers required to operate IndieDB. This configuration is maintained by the developer and is not customer build data.
 
 Local application configuration may contain developer credentials and authorised operator identifiers required to operate IndieDB. This configuration is maintained by the developer and is not customer build data.
 
@@ -98,17 +108,19 @@ Information is transmitted to Discord as necessary for the bot to operate. Twitc
 
 IndieDB does not intentionally provide customer Discord information to Twitch.
 
-## 9. Removing IndieDB
+## 9. Removing IndieDB and Stored Ownership Information
 
 A server owner may remove IndieDB from their Discord server using Discord's normal application and bot-management controls.
 
-After removal, IndieDB can no longer access that Discord server.
+After removal, IndieDB can no longer access that Discord server through Discord.
 
 Channels, categories, roles and permissions previously created by IndieDB remain part of the Discord server unless they are separately removed.
 
-Because IndieDB does not maintain a persistent customer database, there is normally no stored customer server record to delete.
+IndieDB's local ownership record may retain the Discord server ID and resource IDs of items previously created by IndieDB. This information is retained for operational and safety purposes, including identifying resources created by IndieDB if the bot is later used with that server again.
 
-An unfinished setup session may remain temporarily in the running application's memory until the process is restarted or the session is otherwise cleared. It is not written to persistent customer storage.
+IndieDB does not use this ownership information to store message content or Discord user profiles.
+
+An unfinished setup session may also remain temporarily in the running application's memory until the process is restarted or the session is otherwise cleared. Temporary setup sessions are not written to persistent customer storage.
 
 ## 10. Security
 
